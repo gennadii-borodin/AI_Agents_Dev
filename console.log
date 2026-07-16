@@ -1,0 +1,68 @@
+CASE: Add a new review to TC with workritem id 3fa85f64-5717-4562-b3fc-2c963f66afa6
+{
+    "status": "OK",
+    "tool_call": {
+        "type": "tool_call",
+        "tool": "add_review_to_work_item",
+        "arguments": {
+            "work_item_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "text": "This is a new review",
+            "overwrite": false
+        }
+    },
+    "tool_result": {
+        "status": "SUCCESS",
+        "work_item_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "message": "Review has been added to the test case"
+    },
+    "sop": "SOP: add_review_to_work_item\n\n1. Use add_review_to_work_item tool when the test case review is finished and report is ready.\n2. Required input: text, work_item_id.\n3. Validate that text is present and is a non-empty string.\n4. Validate that work_item_id is present and is a valid UUID formatted string.\n5. If no test case is found by work_item_id, return NOT_FOUND.\n6. If the test case already has a review and overwrite=False, return CONFLICT.\n7. On validation_error, write log with detailed description.\n8. On timeout error, retry once then escalate to a human operator.\n9. Safety: DO NOT CREATE TEST CASES WITH MISSING work_item_id.\n10. Safety: NEVER USE overwrite=True WITHOUT HUMAN OPERATOR CONFIRMATION."
+}
+
+Test cases dumps
+{
+    "work_item_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "text": "This is a new review"
+}
+
+CASE: Update a review to TC with workritem id 5fa85f64-5717-4562-b3fc-2c963f66afa6
+{
+    "status": "OK",
+    "tool_call": {
+        "type": "tool_call",
+        "tool": "add_review_to_work_item",
+        "arguments": {
+            "work_item_id": "5fa85f64-5717-4562-b3fc-2c963f66afa6",
+            "text": "This is an updated review",
+            "overwrite": true
+        }
+    },
+    "tool_result": {
+        "status": "CHANGED",
+        "work_item_id": "5fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "message": "Review has been changed"
+    },
+    "sop": "SOP: add_review_to_work_item\n\n1. Use add_review_to_work_item tool when the test case review is finished and report is ready.\n2. Required input: text, work_item_id.\n3. Validate that text is present and is a non-empty string.\n4. Validate that work_item_id is present and is a valid UUID formatted string.\n5. If no test case is found by work_item_id, return NOT_FOUND.\n6. If the test case already has a review and overwrite=False, return CONFLICT.\n7. On validation_error, write log with detailed description.\n8. On timeout error, retry once then escalate to a human operator.\n9. Safety: DO NOT CREATE TEST CASES WITH MISSING work_item_id.\n10. Safety: NEVER USE overwrite=True WITHOUT HUMAN OPERATOR CONFIRMATION."
+}
+
+Test cases dumps
+{
+    "work_item_id": "5fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "text": "This is an updated review"
+}
+
+CASE: Unknown tool call
+{
+    "status": "ERROR",
+    "error_type": "unknown_tool",
+    "message": "Unknown tool: get_review_from_work_item"
+}
+
+Test cases dumps
+{
+    "work_item_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "text": "This is a new review"
+}
+{
+    "work_item_id": "5fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "text": "This is an updated review"
+}
